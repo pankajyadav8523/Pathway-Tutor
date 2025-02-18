@@ -1,0 +1,23 @@
+[project]
+name = "ml_chatbot"
+version = "0.1.0"
+description = "ml-chatbot using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.102.0,<1.0.0"
+]
+
+[project.scripts]
+ml_chatbot = "ml_chatbot.main:run"
+run_crew = "ml_chatbot.main:run"
+train = "ml_chatbot.main:train"
+replay = "ml_chatbot.main:replay"
+test = "ml_chatbot.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
