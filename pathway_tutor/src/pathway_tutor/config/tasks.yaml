@@ -1,0 +1,7 @@
+categorization:
+  description: >
+    Analyze the input question and determine its category, such as Definition-Based, Concept Explanation, 
+    Difference-Based, Problem-Solving, or Step-by-Step Process.
+  expected_output: >
+    A single category label that best represents the type of question provided by the student.
+  agent: classifier
