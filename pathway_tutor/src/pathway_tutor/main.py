@@ -2,7 +2,6 @@
 import warnings
 from datetime import datetime
 from crew import PathwayTutor
-import litellm
 from dotenv import load_dotenv
 import os
 
