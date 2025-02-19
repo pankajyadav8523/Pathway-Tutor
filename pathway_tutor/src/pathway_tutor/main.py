@@ -18,16 +18,24 @@ def run():
     """
     Run the crew to categorize a student's question.
     """
-    question = input("Enter the question: ")
-    inputs = {
-        'question': question,
-        'current_year': str(datetime.now().year)
-    }
-    
-    try:
-        PathwayTutor().crew().kickoff(inputs=inputs)
-    except Exception as e:
-        raise Exception(f"An error occurred while running the crew: {e}")
+    while True:
+        try:
+            question = input("Enter the question (or type 'exit' to quit): ")
+            if question.lower() == 'exit':
+                print("Exiting...")
+                break
+            
+            inputs = {
+                'question': question,
+                'current_year': str(datetime.now().year)
+            }
+            
+            PathwayTutor().crew().kickoff(inputs=inputs)
+        except EOFError:
+            print("\nDetected EOF (Ctrl+D). Exiting...")
+            break
+        except Exception as e:
+            print(f"An error occurred while running the crew: {e}")
 
 if __name__ == "__main__":
     run()
