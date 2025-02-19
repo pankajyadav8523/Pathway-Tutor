@@ -21,8 +21,6 @@ class PathwayTutor():
         """Task to classify the question into a category"""
         return Task(
             config=self.tasks_config['categorization'],
-            description="Analyzes the input question and determines its category, such as Definition-Based, Concept Explanation, Difference-Based, etc.",
-            expected_output="A category label that best fits the question type.",
             agent=self.classifier()
         )
 
