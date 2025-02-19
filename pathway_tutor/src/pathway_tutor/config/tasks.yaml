@@ -1,7 +1,6 @@
 categorization:
   description: >
-    Analyze the input question and determine its category, such as Definition-Based, Concept Explanation, 
-    Difference-Based, Problem-Solving, or Step-by-Step Process.
+    Analyze the input question and determine its most appropriate category based on its nature. Categories may include, but are not limited to, Definition-Based, Concept Explanation, Difference-Based, Problem-Solving, Step-by-Step Process, and other relevant classifications depending on the context of the question. The goal is to ensure structured and effective guidance for the student.
   expected_output: >
-    A single category label that best represents the type of question provided by the student.
+    A single category label that best represents the type of question provided by the student, ensuring accurate classification for step-by-step assistance.
   agent: classifier
