@@ -1,6 +1,12 @@
 categorization:
   description: >
-    Analyze the input question and determine its most appropriate category based on its nature. Categories may include, but are not limited to, Definition-Based, Concept Explanation, Difference-Based, Problem-Solving, Step-by-Step Process, and other relevant classifications depending on the context of the question. The goal is to ensure structured and effective guidance for the student.
+    Analyze the user's question and categorize it into one of these types:
+    - Definition-Based: Questions asking for definitions or basic explanations
+    - Concept-Explanation: Requests for detailed explanations of concepts
+    - Problem-Solving: Questions requiring step-by-step solutions
+    - Comparison: Questions asking for differences/similarities
+    - Process-Guide: Requests for procedural guidance
+    Current Question: {question}
   expected_output: >
-    A single category label that best represents the type of question provided by the student, ensuring accurate classification for step-by-step assistance.
+    Only the category name from the list above, nothing else.
   agent: classifier
