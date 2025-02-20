@@ -4,20 +4,17 @@ from datetime import datetime
 from crew import PathwayTutor
 from dotenv import load_dotenv
 import os
+import litellm
 
-# Load environment variables from the .env file
+# Load environment variables
 load_dotenv()
-api_key = os.getenv("GROQ_API_KEY")
-# model = os.getenv("MODEL")
 
-# litellm.completion(api_key=api_key, model=model)
-
-warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
+# Configure LiteLLM for Groq
+litellm.drop_params = True
+os.environ["OPENAI_API_KEY"] = os.getenv("GROQ_API_KEY")  # Map Groq key to OpenAI key name
+MODEL_NAME = os.getenv("MODEL")
 
 def run():
-    """
-    Run the crew to categorize a student's question.
-    """
     while True:
         try:
             question = input("Enter the question (or type 'exit' to quit): ")
@@ -27,7 +24,8 @@ def run():
             
             inputs = {
                 'question': question,
-                'current_year': str(datetime.now().year)
+                'current_year': str(datetime.now().year),
+                'model': MODEL_NAME
             }
             
             PathwayTutor().crew().kickoff(inputs=inputs)
