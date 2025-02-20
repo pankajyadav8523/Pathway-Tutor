@@ -13,7 +13,9 @@ class PathwayTutor():
         """Agent responsible for categorizing the student's question"""
         return Agent(
             config=self.agents_config['classifier'],
-            verbose=True
+            verbose=True,
+            allow_delegation=False,
+            max_iter=3
         )
 
     @task
