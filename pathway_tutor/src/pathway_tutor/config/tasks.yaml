@@ -2,6 +2,7 @@ categorization:
   description: >
     Analyze the user's question and categorize it into one of these types:
     - Definition-Based: Questions asking for definitions or basic explanations
+    - General Knowledge: Questions asking for any general information
     - Concept-Explanation: Requests for detailed explanations of concepts
     - Problem-Solving: Questions requiring step-by-step solutions
     - Comparison: Questions asking for differences/similarities
