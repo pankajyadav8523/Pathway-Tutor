@@ -155,3 +155,151 @@ comparison_tasks:
     expected_output: >
       The comparison is summarized in a clear and concise manner
     agent: comparison
+
+process_guide_tasks:
+  task_1:
+    task: Identify the process or procedure requested
+    description: >
+      Extract the process or procedure mentioned in the user's question that requires guidance
+    expected_output: >
+      The specific process or procedure is identified and extracted from the input question
+    agent: process_guide
+  task_2:
+    task: Break the process into sequential steps
+    description: >
+      Divide the process into a clear sequence of steps for easier comprehension
+    expected_output: >
+      The process is structured into clear and sequential steps
+    agent: process_guide
+  task_3:
+    task: Explain each step in detail
+    description: >
+      Provide a detailed explanation of each step in the process
+    expected_output: >
+      A step-by-step explanation of the process is provided
+    agent: process_guide
+  task_4:
+    task: Include relevant tools or methods required
+    description: >
+      Mention any tools, techniques, or resources needed to complete the process
+    expected_output: >
+      Relevant tools, techniques, or resources are specified
+    agent: process_guide
+  task_5:
+    task: Provide common mistakes and best practices
+    description: >
+      Highlight common mistakes and best practices for successfully completing the process
+    expected_output: >
+      Common mistakes and best practices are included
+    agent: process_guide
+
+doubt_clearing_tasks:
+  task_1:
+    task: Identify the specific doubt or confusion
+    description: >
+      Extract the exact doubt or confusion the user has regarding a concept
+    expected_output: >
+      The specific doubt or confusion is identified and extracted
+    agent: doubt_clearing
+  task_2:
+    task: Clarify the misunderstood concept
+    description: >
+      Address the misunderstanding by explaining the concept clearly
+    expected_output: >
+      The concept is clarified and explained to resolve the doubt
+    agent: doubt_clearing
+  task_3:
+    task: Provide examples or counterexamples
+    description: >
+      Use examples or counterexamples to reinforce understanding and correct misconceptions
+    expected_output: >
+      Relevant examples or counterexamples are provided
+    agent: doubt_clearing
+  task_4:
+    task: Address any follow-up doubts
+    description: >
+      Anticipate related doubts and provide additional clarifications if needed
+    expected_output: >
+      Follow-up doubts are addressed proactively
+    agent: doubt_clearing
+  task_5:
+    task: Encourage critical thinking by asking guiding questions
+    description: >
+      Pose guiding questions to help the student arrive at the correct understanding
+    expected_output: >
+      Guiding questions are provided to encourage deeper understanding
+    agent: doubt_clearing
+
+python_code_tasks:
+  task_1:
+    task: Identify the programming task
+    description: >
+      Extract the specific programming task that needs to be implemented in Python
+    expected_output: >
+      The programming task is identified and extracted from the input question
+    agent: python_code
+  task_2:
+    task: Provide a Python code solution
+    description: >
+      Write a Python script or function that accomplishes the requested task
+    expected_output: >
+      A Python code snippet solving the problem is provided
+    agent: python_code
+  task_3:
+    task: Explain the code and its logic
+    description: >
+      Provide an explanation of the code, including its logic and working
+    expected_output: >
+      The code is explained step by step
+    agent: python_code
+  task_4:
+    task: Suggest improvements or optimizations
+    description: >
+      Suggest alternative approaches or optimizations for better efficiency
+    expected_output: >
+      Optimized versions of the code or alternative solutions are provided
+    agent: python_code
+  task_5:
+    task: Provide example inputs and expected outputs
+    description: >
+      Show example inputs and expected outputs to demonstrate the code’s functionality
+    expected_output: >
+      Example inputs and expected outputs are provided
+    agent: python_code
+
+python_debug_tasks:
+  task_1:
+    task: Identify the issue in the given Python code
+    description: >
+      Analyze the provided Python code and detect potential errors or bugs
+    expected_output: >
+      The error or bug is identified and extracted
+    agent: python_debug
+  task_2:
+    task: Explain the cause of the issue
+    description: >
+      Describe the cause of the identified error or bug
+    expected_output: >
+      A clear explanation of the issue is provided
+    agent: python_debug
+  task_3:
+    task: Provide a corrected version of the code
+    description: >
+      Offer a corrected or debugged version of the Python code
+    expected_output: >
+      A corrected version of the Python code is provided
+    agent: python_debug
+  task_4:
+    task: Suggest best practices to avoid similar errors
+    description: >
+      Provide coding best practices to prevent similar mistakes in the future
+    expected_output: >
+      Best practices are shared to avoid similar mistakes
+    agent: python_debug
+  task_5:
+    task: Validate the correctness of the fix
+    description: >
+      Ensure that the fix correctly resolves the issue without introducing new bugs
+    expected_output: >
+      The solution is verified to work as expected
+    agent: python_debug
