@@ -2,16 +2,156 @@ categorization:
   description: >
     Analyze the user's question and categorize it into one of these types:
     - Definition-Based: Questions asking for definitions or basic explanations
-    - General Knowledge: Questions asking for any general information
     - Concept-Explanation: Requests for detailed explanations of concepts
     - Problem-Solving: Questions requiring step-by-step solutions
     - Comparison: Questions asking for differences/similarities
     - Process-Guide: Requests for procedural guidance
     - Doubt-Clearing: asking doubts regarding a particular concept
-    - Python-Code: python code for  accomplishing a particular task
+    - Python-Code: python code for accomplishing a particular task
     - Python-Debug: debug a python code written for a particular task
     - Irrelevant: Not relevant to Data Science, Machine Learning, Deep Learning and Artificial Intelligence
     Current Question: {question}
   expected_output: >
-    Only the category name from the list above, nothing else.
+    Only the category name from the list above, nothing else
   agent: classifier
+
+definition_based_tasks:
+  task_1:
+    task: Identify the term or concept that needs to be defined
+    description: >
+      Extract the term or concept from the user's question that requires a definition
+    expected_output: >
+      The specific term or concept is identified and extracted from the input question
+    agent: definition_based
+  task_2:
+    task: Provide a clear and concise definition
+    description: >
+      Define the term or concept in a simple and understandable manner
+    expected_output: >
+      A precise and easy-to-understand definition of the term or concept is provided
+    agent: definition_based
+  task_3:
+    task: Offer a basic explanation or context for the term
+    description: >
+      Provide additional context or a simple explanation to help the student understand the term better
+    expected_output: >
+      Additional context or a simple explanation is given to clarify the term
+    agent: definition_based
+  task_4:
+    task: Use examples or analogies to reinforce understanding
+    description: >
+      Provide examples or analogies to make the definition more relatable and understandable
+    expected_output: >
+      Relevant examples or analogies are provided to reinforce the understanding of the term
+    agent: definition_based
+
+concept_explanation_tasks:
+  task_1:
+    task: Identify the concept or idea that needs to be explained
+    description: >
+      Extract the concept or idea from the user's question that requires a detailed explanation
+    expected_output: >
+      The specific concept or idea is identified and extracted from the input question
+    agent: concept_explanation
+  task_2:
+    task: Break the concept into smaller, understandable parts
+    description: >
+      Divide the concept into logical, smaller components for easier understanding
+    expected_output: >
+      The concept is broken down into smaller, manageable parts
+    agent: concept_explanation
+  task_3:
+    task: Provide a step-by-step explanation of each part
+    description: >
+      Explain each part of the concept in a structured and detailed manner
+    expected_output: >
+      A clear and structured explanation of each part is provided
+    agent: concept_explanation
+  task_4:
+    task: Use diagrams, examples, or analogies to enhance clarity
+    description: >
+      Include visual aids (diagrams), examples, or analogies to make the explanation more engaging and understandable
+    expected_output: >
+      Diagrams, examples, or analogies are provided to enhance understanding
+    agent: concept_explanation
+  task_5:
+    task: Ensure the explanation is tailored to the student's level of understanding
+    description: >
+      Adapt the explanation to match the student's knowledge level
+    expected_output: >
+      The explanation is customized to suit the student's level of understanding
+    agent: concept_explanation
+
+problem_solving_tasks:
+  task_1:
+    task: Understand the problem statement and its requirements
+    description: >
+      Analyze the problem statement to fully grasp what is being asked
+    expected_output: >
+      The problem statement is clearly understood, and its requirements are identified
+    agent: problem_solving
+  task_2:
+    task: Break the problem into smaller, manageable steps
+    description: >
+      Divide the problem into logical, smaller steps to make it easier to solve
+    expected_output: >
+      The problem is broken down into smaller, manageable steps
+    agent: problem_solving
+  task_3:
+    task: Solve each step sequentially, explaining the reasoning behind it
+    description: >
+      Solve each step of the problem while explaining the reasoning behind the solution
+    expected_output: >
+      Each step is solved, and the reasoning is clearly explained
+    agent: problem_solving
+  task_4:
+    task: Verify the solution and ensure it is correct
+    description: >
+      Check the solution to ensure it is accurate and meets the problem's requirements
+    expected_output: >
+      The solution is verified and confirmed to be correct
+    agent: problem_solving
+  task_5:
+    task: Provide alternative approaches or solutions if applicable
+    description: >
+      Offer alternative methods or solutions to solve the problem, if possible
+    expected_output: >
+      Alternative approaches or solutions are provided, if applicable
+    agent: problem_solving
+
+comparison_tasks:
+  task_1:
+    task: Identify the two or more entities to be compared
+    description: >
+      Extract the entities (concepts, theories, objects, etc.) from the user's question that need to be compared
+    expected_output: >
+      The entities to be compared are identified and extracted from the input question
+    agent: comparison
+  task_2:
+    task: Analyze their characteristics, features, or properties
+    description: >
+      Examine the characteristics, features, or properties of each entity
+    expected_output: >
+      The characteristics, features, or properties of each entity are analyzed
+    agent: comparison
+  task_3:
+    task: Highlight similarities and differences in a structured format
+    description: >
+      Compare the entities and present their similarities and differences in a clear and structured manner
+    expected_output: >
+      Similarities and differences are highlighted in a structured format
+    agent: comparison
+  task_4:
+    task: Provide examples or analogies to reinforce understanding
+    description: >
+      Provide examples or analogies to make the comparison more relatable and understandable
+    expected_output: >
+      Relevant examples or analogies are provided to reinforce understanding
+    agent: comparison
+  task_5:
+    task: Summarize the comparison in a clear and concise manner
+    description: >
+      Provide a summary of the comparison, highlighting the key points
+    expected_output: >
+      The comparison is summarized in a clear and concise manner
+    agent: comparison
