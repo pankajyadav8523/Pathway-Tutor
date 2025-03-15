@@ -57,6 +57,46 @@ class PathwayTutor():
             allow_delegation=False,
             max_iter=3
         )
+    
+    @agent
+    def process_guide(self) -> Agent:
+        """Agent responsible for guiding through processes"""
+        return Agent(
+            config=self.agents_config['process_guide'],
+            verbose=True,
+            allow_delegation=False,
+            max_iter=3
+        )
+
+    @agent
+    def doubt_clearing(self) -> Agent:
+        """Agent responsible for clearing doubts"""
+        return Agent(
+        config=self.agents_config['doubt_clearing'],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=3
+        )
+
+    @agent
+    def python_code(self) -> Agent:
+        """Agent responsible for providing Python code solutions"""
+        return Agent(
+        config=self.agents_config['python_code'],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=3
+        )
+
+    @agent
+    def python_debug(self) -> Agent:
+        """Agent responsible for debugging Python code"""
+        return Agent(
+        config=self.agents_config['python_debug'],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=3
+        )
 
     @task
     def categorize_question(self) -> Task:
@@ -98,6 +138,38 @@ class PathwayTutor():
             agent=self.comparison()
         )
 
+    @task
+    def guide_process(self) -> Task:
+        """Task to guide through a process"""
+        return Task(
+        config=self.tasks_config['process_guide_tasks']['task_1'],
+        agent=self.process_guide()
+        )
+
+    @task
+    def clear_doubt(self) -> Task:
+        """Task to clear a doubt"""
+        return Task(
+        config=self.tasks_config['doubt_clearing_tasks']['task_1'],
+        agent=self.doubt_clearing()
+        )
+
+    @task
+    def provide_python_code(self) -> Task:
+        """Task to provide Python code"""
+        return Task(
+        config=self.tasks_config['python_code_tasks']['task_1'],
+        agent=self.python_code()
+        )
+
+    @task
+    def debug_python_code(self) -> Task:
+        """Task to debug Python code"""
+        return Task(
+        config=self.tasks_config['python_debug_tasks']['task_1'],
+        agent=self.python_debug()
+        )
+
     @crew
     def crew(self) -> Crew:
         """Creates the PathwayTutor crew"""
@@ -107,14 +179,23 @@ class PathwayTutor():
                 self.definition_based(),
                 self.concept_explanation(),
                 self.problem_solving(),
-                self.comparison()
+                self.comparison(),
+                self.process_guide(),
+                self.doubt_clearing(),
+                self.python_code(),
+                self.python_debug()
             ],
             tasks=[
                 self.categorize_question(),
                 self.define_term(),
                 self.explain_concept(),
                 self.solve_problem(),
-                self.compare_concepts()
+                self.compare_concepts(),
+                self.guide_process(),
+                self.clear_doubt(),
+                self.provide_python_code(),
+                self.debug_python_code()
+
             ],
             process=Process.sequential,
             verbose=True,
