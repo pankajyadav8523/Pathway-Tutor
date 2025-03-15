@@ -55,6 +55,14 @@ def run():
                 task = tutor.solve_problem()
             elif category == "Comparison":
                 task = tutor.compare_concepts()
+            elif category == "Process-Guide":
+                task = tutor.guide_process()
+            elif category == "Doubt-Clearing":
+                task = tutor.clear_doubt()
+            elif category == "Python-Code":
+                task = tutor.provide_python_code()
+            elif category == "Python-Debug":
+                task = tutor.debug_python_code()
             else:
                 print(f"Category '{category}' not handled yet or irrelevant.")
                 continue
