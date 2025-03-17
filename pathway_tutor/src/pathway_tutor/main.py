@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from datetime import datetime
-from crew import PathwayTutor
+from .crew import PathwayTutor
 from dotenv import load_dotenv
 import os
 import litellm
@@ -15,16 +15,50 @@ litellm.drop_params = True
 os.environ["OPENAI_API_KEY"] = os.getenv("GROQ_API_KEY")  # Map Groq key to OpenAI key name
 MODEL_NAME = os.getenv("MODEL")
 
+def display_welcome():
+    print("\n" + "🌟" * 40)
+    print("Welcome to Pathway Tutor - Your AI Learning Companion!")
+    print("🌟" * 40)
+    print("\nI'll help you understand concepts through guided learning.")
+    print("Type 'menu' anytime to see options or 'exit' to quit.\n")
+
+
+def show_menu():
+    print("\nOptions:")
+    print("1. Ask a new question")
+    print("2. Clarify previous answer")
+    print("3. Go deeper into current topic")
+    print("4. Change subject")
+    print("5. Exit")
+
+
+def handle_response(result, memory):
+    print("\n" + "📘 " + "="*50)
+    print(f"🧠 Category: {result.get('category', 'General')}")
+    print("📝 Guidance:")
+    print(result.get('output', 'No guidance generated'))
+
+    follow_up = input("\n🤔 Would you like to: \n1. Ask follow-up \n2. New question \n3. Exit\nChoice (1-3): ")
+    return follow_up
+
+
 def run():
     tutor = PathwayTutor()  # Initialize once outside the loop
-    
+    conversation_history = []
+
+    display_welcome()
+
     while True:
         try:
-            question = input("Enter the question (or type 'exit' to quit): ")
-            if question.lower() == 'exit':
-                print("Exiting...")
+            question = input("\n💡 What would you like to learn about? ").strip()
+            if question.lower() in ['exit', '5']:
+                print("\n👋 Thank you for using Pathway Tutor!")
                 break
-            
+
+            if question.lower() == 'menu':
+                show_menu()
+                continue
+
             inputs = {
                 'question': question,
                 'current_year': str(datetime.now().year),
@@ -79,12 +113,40 @@ def run():
             )
             result = execution_crew.kickoff(inputs=inputs)
             print(f"Result:\n{result}")
+            
 
-        except EOFError:
-            print("\nDetected EOF (Ctrl+D). Exiting...")
-            break
+            # Conversation loop for follow-ups
+            while True:
+                # Store conversation context
+                context = {
+                    'question': question,
+                    'history': "\n".join(conversation_history[-3:]),  # Last 3 exchanges
+                    'model': MODEL_NAME
+                }
+                
+                # Run categorization and guidance
+                result = tutor.crew().kickoff(inputs=context)
+                conversation_history.append(f"Q: {question}\nA: {result.get('output', '')}")
+                
+                # Handle user flow
+                choice = handle_response(result, conversation_history)
+
+                if choice == '1':
+                    question = input("\n🔍 What specifically would you like to follow up on? ")
+                elif choice == '2':
+                    question = input("\n🎯 What new question would you like to ask? ")
+                    break
+                elif choice == '3':
+                    print("\n👋 Thank you for learning with Pathway Tutor!")
+                    return
+                else:
+                    print("\n⚠️ Please choose a valid option.")
+        
+        except KeyboardInterrupt:
+            print("\n\n🛑 Session interrupted. Type 'exit' to quit or ask another question.")
         except Exception as e:
-            print(f"An error occurred while running the crew: {e}")
+            print(f"\n❌ Error: {str(e)}")
+            conversation_history.append(f"System Error: {str(e)}")
 
 if __name__ == "__main__":
     run()
