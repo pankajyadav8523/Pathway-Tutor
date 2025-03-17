@@ -1,102 +1,62 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from langchain_community.llms import OpenAI
+from .memory import PathwayMemory
 
 @CrewBase
-class PathwayTutor():
+class PathwayTutor(Crew):
     """PathwayTutor AI Crew"""
+    def __init__(self):
+        self.memory = PathwayMemory()
 
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
-    @agent
-    def classifier(self) -> Agent:
-        """Agent responsible for categorizing the student's question"""
+    def _create_agent(self, config_name):
         return Agent(
-            config=self.agents_config['classifier'],
+            config=self.agents_config[config_name],
             verbose=True,
-            allow_delegation=False,
-            max_iter=3
-        )
-
-    @agent
-    def definition_based(self) -> Agent:
-        """Agent responsible for providing definitions and basic explanations"""
-        return Agent(
-            config=self.agents_config['definition_based'],
-            verbose=True,
-            allow_delegation=False,
-            max_iter=3
-        )
-
-    @agent
-    def concept_explanation(self) -> Agent:
-        """Agent responsible for providing detailed explanations of concepts"""
-        return Agent(
-            config=self.agents_config['concept_explanation'],
-            verbose=True,
-            allow_delegation=False,
-            max_iter=3
-        )
-
-    @agent
-    def problem_solving(self) -> Agent:
-        """Agent responsible for solving problems step-by-step"""
-        return Agent(
-            config=self.agents_config['problem_solving'],
-            verbose=True,
-            allow_delegation=False,
-            max_iter=3
-        )
-
-    @agent
-    def comparison(self) -> Agent:
-        """Agent responsible for comparing and contrasting concepts"""
-        return Agent(
-            config=self.agents_config['comparison'],
-            verbose=True,
+            memory=self.memory,  # Inject memory
+            llm=OpenAI(temperature=0),  # Base LLM for memory ops
             allow_delegation=False,
             max_iter=3
         )
     
     @agent
+    def classifier(self) -> Agent:
+        return self._create_agent('classifier')
+
+    @agent
+    def definition_based(self) -> Agent:
+        return self._create_agent('definition_based')
+
+    @agent
+    def concept_explanation(self) -> Agent:
+        return self._create_agent('concept_explanation')
+
+    @agent
+    def problem_solving(self) -> Agent:
+        return self._create_agent('problem_solving')
+
+    @agent
+    def comparison(self) -> Agent:
+        return self._create_agent('comparison')
+
+    @agent
     def process_guide(self) -> Agent:
-        """Agent responsible for guiding through processes"""
-        return Agent(
-            config=self.agents_config['process_guide'],
-            verbose=True,
-            allow_delegation=False,
-            max_iter=3
-        )
+        return self._create_agent('process_guide')
 
     @agent
     def doubt_clearing(self) -> Agent:
-        """Agent responsible for clearing doubts"""
-        return Agent(
-        config=self.agents_config['doubt_clearing'],
-        verbose=True,
-        allow_delegation=False,
-        max_iter=3
-        )
+        return self._create_agent('doubt_clearing')
 
     @agent
     def python_code(self) -> Agent:
-        """Agent responsible for providing Python code solutions"""
-        return Agent(
-        config=self.agents_config['python_code'],
-        verbose=True,
-        allow_delegation=False,
-        max_iter=3
-        )
+        return self._create_agent('python_code')
 
     @agent
     def python_debug(self) -> Agent:
-        """Agent responsible for debugging Python code"""
-        return Agent(
-        config=self.agents_config['python_debug'],
-        verbose=True,
-        allow_delegation=False,
-        max_iter=3
-        )
+        return self._create_agent('python_debug')
 
     @task
     def categorize_question(self) -> Task:
@@ -197,6 +157,8 @@ class PathwayTutor():
                 self.debug_python_code()
 
             ],
+            memory=self.memory,
             process=Process.sequential,
-            verbose=True,
+            verbose=2,
+            full_output=True
         )
