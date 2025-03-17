@@ -1,305 +1,487 @@
+# categorization:
+#   description: >
+#     Analyze the user's question and categorize it into one of these types:
+#     - Definition-Based: Questions asking for definitions or basic explanations
+#     - Concept-Explanation: Requests for detailed explanations of concepts
+#     - Problem-Solving: Questions requiring step-by-step solutions
+#     - Comparison: Questions asking for differences/similarities
+#     - Process-Guide: Requests for procedural guidance
+#     - Doubt-Clearing: asking doubts regarding a particular concept
+#     - Python-Code: python code for accomplishing a particular task
+#     - Python-Debug: debug a python code written for a particular task
+#     - Irrelevant: Not relevant to Data Science, Machine Learning, Deep Learning and Artificial Intelligence
+#     Current Question: {question}
+#   expected_output: >
+#     Only the category name from the list above, nothing else
+#   agent: classifier
+
+# definition_based_tasks:
+#   task_1:
+#     task: Identify the term or concept that needs to be defined
+#     description: >
+#       Extract the term or concept from the user's question that requires a definition
+#     expected_output: >
+#       The specific term or concept is identified and extracted from the input question
+#     agent: definition_based
+#   task_2:
+#     task: Provide a clear and concise definition
+#     description: >
+#       Define the term or concept in a simple and understandable manner
+#     expected_output: >
+#       A precise and easy-to-understand definition of the term or concept is provided
+#     agent: definition_based
+#   task_3:
+#     task: Offer a basic explanation or context for the term
+#     description: >
+#       Provide additional context or a simple explanation to help the student understand the term better
+#     expected_output: >
+#       Additional context or a simple explanation is given to clarify the term
+#     agent: definition_based
+#   task_4:
+#     task: Use examples or analogies to reinforce understanding
+#     description: >
+#       Provide examples or analogies to make the definition more relatable and understandable
+#     expected_output: >
+#       Relevant examples or analogies are provided to reinforce the understanding of the term
+#     agent: definition_based
+
+# concept_explanation_tasks:
+#   task_1:
+#     task: Identify the concept or idea that needs to be explained
+#     description: >
+#       Extract the concept or idea from the user's question that requires a detailed explanation
+#     expected_output: >
+#       The specific concept or idea is identified and extracted from the input question
+#     agent: concept_explanation
+#   task_2:
+#     task: Break the concept into smaller, understandable parts
+#     description: >
+#       Divide the concept into logical, smaller components for easier understanding
+#     expected_output: >
+#       The concept is broken down into smaller, manageable parts
+#     agent: concept_explanation
+#   task_3:
+#     task: Provide a step-by-step explanation of each part
+#     description: >
+#       Explain each part of the concept in a structured and detailed manner
+#     expected_output: >
+#       A clear and structured explanation of each part is provided
+#     agent: concept_explanation
+#   task_4:
+#     task: Use diagrams, examples, or analogies to enhance clarity
+#     description: >
+#       Include visual aids (diagrams), examples, or analogies to make the explanation more engaging and understandable
+#     expected_output: >
+#       Diagrams, examples, or analogies are provided to enhance understanding
+#     agent: concept_explanation
+#   task_5:
+#     task: Ensure the explanation is tailored to the student's level of understanding
+#     description: >
+#       Adapt the explanation to match the student's knowledge level
+#     expected_output: >
+#       The explanation is customized to suit the student's level of understanding
+#     agent: concept_explanation
+
+# problem_solving_tasks:
+#   task_1:
+#     task: Understand the problem statement and its requirements
+#     description: >
+#       Analyze the problem statement to fully grasp what is being asked
+#     expected_output: >
+#       The problem statement is clearly understood, and its requirements are identified
+#     agent: problem_solving
+#   task_2:
+#     task: Break the problem into smaller, manageable steps
+#     description: >
+#       Divide the problem into logical, smaller steps to make it easier to solve
+#     expected_output: >
+#       The problem is broken down into smaller, manageable steps
+#     agent: problem_solving
+#   task_3:
+#     task: Solve each step sequentially, explaining the reasoning behind it
+#     description: >
+#       Solve each step of the problem while explaining the reasoning behind the solution
+#     expected_output: >
+#       Each step is solved, and the reasoning is clearly explained
+#     agent: problem_solving
+#   task_4:
+#     task: Verify the solution and ensure it is correct
+#     description: >
+#       Check the solution to ensure it is accurate and meets the problem's requirements
+#     expected_output: >
+#       The solution is verified and confirmed to be correct
+#     agent: problem_solving
+#   task_5:
+#     task: Provide alternative approaches or solutions if applicable
+#     description: >
+#       Offer alternative methods or solutions to solve the problem, if possible
+#     expected_output: >
+#       Alternative approaches or solutions are provided, if applicable
+#     agent: problem_solving
+
+# comparison_tasks:
+#   task_1:
+#     task: Identify the two or more entities to be compared
+#     description: >
+#       Extract the entities (concepts, theories, objects, etc.) from the user's question that need to be compared
+#     expected_output: >
+#       The entities to be compared are identified and extracted from the input question
+#     agent: comparison
+#   task_2:
+#     task: Analyze their characteristics, features, or properties
+#     description: >
+#       Examine the characteristics, features, or properties of each entity
+#     expected_output: >
+#       The characteristics, features, or properties of each entity are analyzed
+#     agent: comparison
+#   task_3:
+#     task: Highlight similarities and differences in a structured format
+#     description: >
+#       Compare the entities and present their similarities and differences in a clear and structured manner
+#     expected_output: >
+#       Similarities and differences are highlighted in a structured format
+#     agent: comparison
+#   task_4:
+#     task: Provide examples or analogies to reinforce understanding
+#     description: >
+#       Provide examples or analogies to make the comparison more relatable and understandable
+#     expected_output: >
+#       Relevant examples or analogies are provided to reinforce understanding
+#     agent: comparison
+#   task_5:
+#     task: Summarize the comparison in a clear and concise manner
+#     description: >
+#       Provide a summary of the comparison, highlighting the key points
+#     expected_output: >
+#       The comparison is summarized in a clear and concise manner
+#     agent: comparison
+
+# process_guide_tasks:
+#   task_1:
+#     task: Identify the process or procedure requested
+#     description: >
+#       Extract the process or procedure mentioned in the user's question that requires guidance
+#     expected_output: >
+#       The specific process or procedure is identified and extracted from the input question
+#     agent: process_guide
+#   task_2:
+#     task: Break the process into sequential steps
+#     description: >
+#       Divide the process into a clear sequence of steps for easier comprehension
+#     expected_output: >
+#       The process is structured into clear and sequential steps
+#     agent: process_guide
+#   task_3:
+#     task: Explain each step in detail
+#     description: >
+#       Provide a detailed explanation of each step in the process
+#     expected_output: >
+#       A step-by-step explanation of the process is provided
+#     agent: process_guide
+#   task_4:
+#     task: Include relevant tools or methods required
+#     description: >
+#       Mention any tools, techniques, or resources needed to complete the process
+#     expected_output: >
+#       Relevant tools, techniques, or resources are specified
+#     agent: process_guide
+#   task_5:
+#     task: Provide common mistakes and best practices
+#     description: >
+#       Highlight common mistakes and best practices for successfully completing the process
+#     expected_output: >
+#       Common mistakes and best practices are included
+#     agent: process_guide
+
+# doubt_clearing_tasks:
+#   task_1:
+#     task: Identify the specific doubt or confusion
+#     description: >
+#       Extract the exact doubt or confusion the user has regarding a concept
+#     expected_output: >
+#       The specific doubt or confusion is identified and extracted
+#     agent: doubt_clearing
+#   task_2:
+#     task: Clarify the misunderstood concept
+#     description: >
+#       Address the misunderstanding by explaining the concept clearly
+#     expected_output: >
+#       The concept is clarified and explained to resolve the doubt
+#     agent: doubt_clearing
+#   task_3:
+#     task: Provide examples or counterexamples
+#     description: >
+#       Use examples or counterexamples to reinforce understanding and correct misconceptions
+#     expected_output: >
+#       Relevant examples or counterexamples are provided
+#     agent: doubt_clearing
+#   task_4:
+#     task: Address any follow-up doubts
+#     description: >
+#       Anticipate related doubts and provide additional clarifications if needed
+#     expected_output: >
+#       Follow-up doubts are addressed proactively
+#     agent: doubt_clearing
+#   task_5:
+#     task: Encourage critical thinking by asking guiding questions
+#     description: >
+#       Pose guiding questions to help the student arrive at the correct understanding
+#     expected_output: >
+#       Guiding questions are provided to encourage deeper understanding
+#     agent: doubt_clearing
+
+# python_code_tasks:
+#   task_1:
+#     task: Identify the programming task
+#     description: >
+#       Extract the specific programming task that needs to be implemented in Python
+#     expected_output: >
+#       The programming task is identified and extracted from the input question
+#     agent: python_code
+#   task_2:
+#     task: Provide a Python code solution
+#     description: >
+#       Write a Python script or function that accomplishes the requested task
+#     expected_output: >
+#       A Python code snippet solving the problem is provided
+#     agent: python_code
+#   task_3:
+#     task: Explain the code and its logic
+#     description: >
+#       Provide an explanation of the code, including its logic and working
+#     expected_output: >
+#       The code is explained step by step
+#     agent: python_code
+#   task_4:
+#     task: Suggest improvements or optimizations
+#     description: >
+#       Suggest alternative approaches or optimizations for better efficiency
+#     expected_output: >
+#       Optimized versions of the code or alternative solutions are provided
+#     agent: python_code
+#   task_5:
+#     task: Provide example inputs and expected outputs
+#     description: >
+#       Show example inputs and expected outputs to demonstrate the code’s functionality
+#     expected_output: >
+#       Example inputs and expected outputs are provided
+#     agent: python_code
+
+# python_debug_tasks:
+#   task_1:
+#     task: Identify the issue in the given Python code
+#     description: >
+#       Analyze the provided Python code and detect potential errors or bugs
+#     expected_output: >
+#       The error or bug is identified and extracted
+#     agent: python_debug
+#   task_2:
+#     task: Explain the cause of the issue
+#     description: >
+#       Describe the cause of the identified error or bug
+#     expected_output: >
+#       A clear explanation of the issue is provided
+#     agent: python_debug
+#   task_3:
+#     task: Provide a corrected version of the code
+#     description: >
+#       Offer a corrected or debugged version of the Python code
+#     expected_output: >
+#       A corrected version of the Python code is provided
+#     agent: python_debug
+#   task_4:
+#     task: Suggest best practices to avoid similar errors
+#     description: >
+#       Provide coding best practices to prevent similar mistakes in the future
+#     expected_output: >
+#       Best practices are shared to avoid similar mistakes
+#     agent: python_debug
+#   task_5:
+#     task: Validate the correctness of the fix
+#     description: >
+#       Ensure that the fix correctly resolves the issue without introducing new bugs
+#     expected_output: >
+#       The solution is verified to work as expected
+#     agent: python_debug
 categorization:
   description: >
-    Analyze the user's question and categorize it into one of these types:
-    - Definition-Based: Questions asking for definitions or basic explanations
-    - Concept-Explanation: Requests for detailed explanations of concepts
-    - Problem-Solving: Questions requiring step-by-step solutions
-    - Comparison: Questions asking for differences/similarities
-    - Process-Guide: Requests for procedural guidance
-    - Doubt-Clearing: asking doubts regarding a particular concept
-    - Python-Code: python code for accomplishing a particular task
-    - Python-Debug: debug a python code written for a particular task
-    - Irrelevant: Not relevant to Data Science, Machine Learning, Deep Learning and Artificial Intelligence
+    Analyze the user's question and conversation history to categorize it:
+    {history}
+
+    Question Types:
+    - Definition-Based: Basic definitions/explanations
+    - Concept-Explanation: Detailed concept breakdowns
+    - Problem-Solving: Step-by-step solutions
+    - Comparison: Differences/similarities analysis
+    - Process-Guide: Procedural guidance
+    - Doubt-Clearing: Conceptual misunderstandings
+    - Python-Code: Python implementation strategies
+    - Python-Debug: Code debugging guidance
+    - Irrelevant: Off-topic questions
+
     Current Question: {question}
-  expected_output: >
-    Only the category name from the list above, nothing else
+  expected_output: Single category name
   agent: classifier
 
-definition_based_tasks:
-  task_1:
-    task: Identify the term or concept that needs to be defined
-    description: >
-      Extract the term or concept from the user's question that requires a definition
-    expected_output: >
-      The specific term or concept is identified and extracted from the input question
-    agent: definition_based
-  task_2:
-    task: Provide a clear and concise definition
-    description: >
-      Define the term or concept in a simple and understandable manner
-    expected_output: >
-      A precise and easy-to-understand definition of the term or concept is provided
-    agent: definition_based
-  task_3:
-    task: Offer a basic explanation or context for the term
-    description: >
-      Provide additional context or a simple explanation to help the student understand the term better
-    expected_output: >
-      Additional context or a simple explanation is given to clarify the term
-    agent: definition_based
-  task_4:
-    task: Use examples or analogies to reinforce understanding
-    description: >
-      Provide examples or analogies to make the definition more relatable and understandable
-    expected_output: >
-      Relevant examples or analogies are provided to reinforce the understanding of the term
-    agent: definition_based
+definition_based:
+  description: >
+    For DEFINITION questions about {question}:
+    - Previous context: {history}
+    - Provide formal definition
+    - Give 3 real-world applications
+    - List common misconceptions
+    - Use analogies matching student level
+  expected_output: >
+    Markdown format:
+    # [Term] Definition
+    ## Core Concept
+    - Formal definition
+    ## Real-World Context
+    - Application 1
+    - Application 2
+    ## Common Misunderstandings
+    - Misconception 1 explanation
+  agent: definition_based
 
-concept_explanation_tasks:
-  task_1:
-    task: Identify the concept or idea that needs to be explained
-    description: >
-      Extract the concept or idea from the user's question that requires a detailed explanation
-    expected_output: >
-      The specific concept or idea is identified and extracted from the input question
-    agent: concept_explanation
-  task_2:
-    task: Break the concept into smaller, understandable parts
-    description: >
-      Divide the concept into logical, smaller components for easier understanding
-    expected_output: >
-      The concept is broken down into smaller, manageable parts
-    agent: concept_explanation
-  task_3:
-    task: Provide a step-by-step explanation of each part
-    description: >
-      Explain each part of the concept in a structured and detailed manner
-    expected_output: >
-      A clear and structured explanation of each part is provided
-    agent: concept_explanation
-  task_4:
-    task: Use diagrams, examples, or analogies to enhance clarity
-    description: >
-      Include visual aids (diagrams), examples, or analogies to make the explanation more engaging and understandable
-    expected_output: >
-      Diagrams, examples, or analogies are provided to enhance understanding
-    agent: concept_explanation
-  task_5:
-    task: Ensure the explanation is tailored to the student's level of understanding
-    description: >
-      Adapt the explanation to match the student's knowledge level
-    expected_output: >
-      The explanation is customized to suit the student's level of understanding
-    agent: concept_explanation
+concept_explanation:
+  description: >
+    Explain {question} conceptually:
+    - Build on previous knowledge: {history}
+    - Break into 3-5 key components
+    - Create explanatory analogy
+    - Suggest visualization methods
+    - Connect to fundamental principles
+  expected_output: >
+    Markdown format:
+    # Concept Breakdown
+    ## Key Components
+    1. Component 1
+    2. Component 2
+    ## Learning Analogy
+    - Relatable comparison
+    ## Visualization Tips
+    - Suggested diagrams/charts
+  agent: concept_explanation
 
-problem_solving_tasks:
-  task_1:
-    task: Understand the problem statement and its requirements
-    description: >
-      Analyze the problem statement to fully grasp what is being asked
-    expected_output: >
-      The problem statement is clearly understood, and its requirements are identified
-    agent: problem_solving
-  task_2:
-    task: Break the problem into smaller, manageable steps
-    description: >
-      Divide the problem into logical, smaller steps to make it easier to solve
-    expected_output: >
-      The problem is broken down into smaller, manageable steps
-    agent: problem_solving
-  task_3:
-    task: Solve each step sequentially, explaining the reasoning behind it
-    description: >
-      Solve each step of the problem while explaining the reasoning behind the solution
-    expected_output: >
-      Each step is solved, and the reasoning is clearly explained
-    agent: problem_solving
-  task_4:
-    task: Verify the solution and ensure it is correct
-    description: >
-      Check the solution to ensure it is accurate and meets the problem's requirements
-    expected_output: >
-      The solution is verified and confirmed to be correct
-    agent: problem_solving
-  task_5:
-    task: Provide alternative approaches or solutions if applicable
-    description: >
-      Offer alternative methods or solutions to solve the problem, if possible
-    expected_output: >
-      Alternative approaches or solutions are provided, if applicable
-    agent: problem_solving
+problem_solving:
+  description: >
+    Guide problem solving for {question}:
+    - Reference similar past problems: {history}
+    - Identify problem type
+    - Outline 3-5 step strategy
+    - Provide thinking prompts
+    - Suggest verification methods
+  expected_output: >
+    Markdown format:
+    # Solution Framework
+    ## Problem Type
+    - Classification
+    ## Step-by-Step Approach
+    1. Step 1
+    2. Step 2
+    ## Verification Checklist
+    - Validation method 1
+  agent: problem_solving
 
-comparison_tasks:
-  task_1:
-    task: Identify the two or more entities to be compared
-    description: >
-      Extract the entities (concepts, theories, objects, etc.) from the user's question that need to be compared
-    expected_output: >
-      The entities to be compared are identified and extracted from the input question
-    agent: comparison
-  task_2:
-    task: Analyze their characteristics, features, or properties
-    description: >
-      Examine the characteristics, features, or properties of each entity
-    expected_output: >
-      The characteristics, features, or properties of each entity are analyzed
-    agent: comparison
-  task_3:
-    task: Highlight similarities and differences in a structured format
-    description: >
-      Compare the entities and present their similarities and differences in a clear and structured manner
-    expected_output: >
-      Similarities and differences are highlighted in a structured format
-    agent: comparison
-  task_4:
-    task: Provide examples or analogies to reinforce understanding
-    description: >
-      Provide examples or analogies to make the comparison more relatable and understandable
-    expected_output: >
-      Relevant examples or analogies are provided to reinforce understanding
-    agent: comparison
-  task_5:
-    task: Summarize the comparison in a clear and concise manner
-    description: >
-      Provide a summary of the comparison, highlighting the key points
-    expected_output: >
-      The comparison is summarized in a clear and concise manner
-    agent: comparison
+comparison:
+  description: >
+    Compare concepts in {question}:
+    - Consider previous comparisons: {history}
+    - Identify comparison dimensions
+    - Create feature matrix
+    - Highlight key differences
+    - Provide usage scenarios
+  expected_output: >
+    Markdown format:
+    # Comparative Analysis
+    | Feature | Concept A | Concept B |
+    |---------|-----------|-----------|
+    | ...     | ...       | ...       |
+    ## Key Differences
+    - Difference 1
+  agent: comparison
 
-process_guide_tasks:
-  task_1:
-    task: Identify the process or procedure requested
-    description: >
-      Extract the process or procedure mentioned in the user's question that requires guidance
-    expected_output: >
-      The specific process or procedure is identified and extracted from the input question
-    agent: process_guide
-  task_2:
-    task: Break the process into sequential steps
-    description: >
-      Divide the process into a clear sequence of steps for easier comprehension
-    expected_output: >
-      The process is structured into clear and sequential steps
-    agent: process_guide
-  task_3:
-    task: Explain each step in detail
-    description: >
-      Provide a detailed explanation of each step in the process
-    expected_output: >
-      A step-by-step explanation of the process is provided
-    agent: process_guide
-  task_4:
-    task: Include relevant tools or methods required
-    description: >
-      Mention any tools, techniques, or resources needed to complete the process
-    expected_output: >
-      Relevant tools, techniques, or resources are specified
-    agent: process_guide
-  task_5:
-    task: Provide common mistakes and best practices
-    description: >
-      Highlight common mistakes and best practices for successfully completing the process
-    expected_output: >
-      Common mistakes and best practices are included
-    agent: process_guide
+process_guide:
+  description: >
+    Guide process for {question}:
+    - Reference related processes: {history}
+    - Define success criteria
+    - Outline 5-7 implementation steps
+    - Identify potential pitfalls
+    - Suggest troubleshooting tips
+  expected_output: >
+    Markdown format:
+    # Process Map
+    1. Step 1
+    2. Step 2
+    !!! warning "Common Pitfalls"
+        - Pitfall 1
+  agent: process_guide
 
-doubt_clearing_tasks:
-  task_1:
-    task: Identify the specific doubt or confusion
-    description: >
-      Extract the exact doubt or confusion the user has regarding a concept
-    expected_output: >
-      The specific doubt or confusion is identified and extracted
-    agent: doubt_clearing
-  task_2:
-    task: Clarify the misunderstood concept
-    description: >
-      Address the misunderstanding by explaining the concept clearly
-    expected_output: >
-      The concept is clarified and explained to resolve the doubt
-    agent: doubt_clearing
-  task_3:
-    task: Provide examples or counterexamples
-    description: >
-      Use examples or counterexamples to reinforce understanding and correct misconceptions
-    expected_output: >
-      Relevant examples or counterexamples are provided
-    agent: doubt_clearing
-  task_4:
-    task: Address any follow-up doubts
-    description: >
-      Anticipate related doubts and provide additional clarifications if needed
-    expected_output: >
-      Follow-up doubts are addressed proactively
-    agent: doubt_clearing
-  task_5:
-    task: Encourage critical thinking by asking guiding questions
-    description: >
-      Pose guiding questions to help the student arrive at the correct understanding
-    expected_output: >
-      Guiding questions are provided to encourage deeper understanding
-    agent: doubt_clearing
+doubt_clearing:
+  description: >
+    Clarify doubts about {question}:
+    - Review previous doubts: {history}
+    - Identify misconception root
+    - Provide counter-examples
+    - Create diagnostic questions
+    - Suggest verification exercises
+  expected_output: >
+    Markdown format:
+    # Doubt Resolution
+    ## Core Misunderstanding
+    - Root cause analysis
+    ## Clarifying Example
+    - Contrastive example
+    ## Self-Check
+    - Diagnostic question
+  agent: doubt_clearing
 
-python_code_tasks:
-  task_1:
-    task: Identify the programming task
-    description: >
-      Extract the specific programming task that needs to be implemented in Python
-    expected_output: >
-      The programming task is identified and extracted from the input question
-    agent: python_code
-  task_2:
-    task: Provide a Python code solution
-    description: >
-      Write a Python script or function that accomplishes the requested task
-    expected_output: >
-      A Python code snippet solving the problem is provided
-    agent: python_code
-  task_3:
-    task: Explain the code and its logic
-    description: >
-      Provide an explanation of the code, including its logic and working
-    expected_output: >
-      The code is explained step by step
-    agent: python_code
-  task_4:
-    task: Suggest improvements or optimizations
-    description: >
-      Suggest alternative approaches or optimizations for better efficiency
-    expected_output: >
-      Optimized versions of the code or alternative solutions are provided
-    agent: python_code
-  task_5:
-    task: Provide example inputs and expected outputs
-    description: >
-      Show example inputs and expected outputs to demonstrate the code’s functionality
-    expected_output: >
-      Example inputs and expected outputs are provided
-    agent: python_code
+python_code:
+  description: >
+    Guide Python implementation for {question}:
+    - Consider previous code discussions: {history}
+    - Suggest architecture pattern
+    - Outline key functions
+    - Recommend testing strategy
+    - Provide pseudo-code sketch
+    - Never write full code
+  expected_output: >
+    Markdown format:
+    # Code Blueprint
+    ```python
+    # Pseudo-code structure
+    def main():
+        # Implementation steps
+    ```
+    ## Testing Approach
+    - Test case 1
+  agent: python_code
 
-python_debug_tasks:
-  task_1:
-    task: Identify the issue in the given Python code
-    description: >
-      Analyze the provided Python code and detect potential errors or bugs
-    expected_output: >
-      The error or bug is identified and extracted
-    agent: python_debug
-  task_2:
-    task: Explain the cause of the issue
-    description: >
-      Describe the cause of the identified error or bug
-    expected_output: >
-      A clear explanation of the issue is provided
-    agent: python_debug
-  task_3:
-    task: Provide a corrected version of the code
-    description: >
-      Offer a corrected or debugged version of the Python code
-    expected_output: >
-      A corrected version of the Python code is provided
-    agent: python_debug
-  task_4:
-    task: Suggest best practices to avoid similar errors
-    description: >
-      Provide coding best practices to prevent similar mistakes in the future
-    expected_output: >
-      Best practices are shared to avoid similar mistakes
-    agent: python_debug
-  task_5:
-    task: Validate the correctness of the fix
-    description: >
-      Ensure that the fix correctly resolves the issue without introducing new bugs
-    expected_output: >
-      The solution is verified to work as expected
-    agent: python_debug
+python_debug:
+  description: >
+    Debug Python code for {question}:
+    - Review code history: {history}
+    - Identify error patterns
+    - Suggest debugging tools
+    - Recommend isolation strategy
+    - Provide fix approach
+  expected_output: >
+    Markdown format:
+    # Debugging Guide
+    ## Error Analysis
+    - Root cause
+    ## Diagnostic Steps
+    1. Step 1
+    ## Fix Strategy
+    - Suggested approach
+  agent: python_debug
+# irrelevant:
+#   description: >
+#     Handle off-topic question {question}:
+#     - Maintain helpful tone
+#     - Suggest related ML/AI topics
+#     - Provide redirection options
+#   expected_output: >
+#     Friendly response suggesting relevant ML topics
+#   agent: irrelevant_handler
